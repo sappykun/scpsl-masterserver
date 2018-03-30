@@ -99,3 +99,14 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Eclipse IDE
+.project
+.pydevproject
+
+# Virtual environment
+env/*
+
+# Development database
+app.db
+

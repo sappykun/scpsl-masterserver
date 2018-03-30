@@ -1,2 +1,2 @@
 # scpsl-masterserver
-An implementation of the master server for SCP:SL
+An implementation of the master server for SCP:SL.

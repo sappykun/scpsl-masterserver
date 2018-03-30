@@ -107,6 +107,7 @@ ENV/
 # Virtual environment
 env/*
 
-# Development database
+# Other
 app.db
+.DS_Store
 

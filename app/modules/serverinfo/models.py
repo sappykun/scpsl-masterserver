@@ -1,3 +1,5 @@
+import time, datetime
+
 from app import db
 
 class ServerInfo(db.Model):
@@ -26,13 +28,27 @@ class ServerInfo(db.Model):
        
     @property
     def serialize(self):
+	# du_unix = time.mktime(self.date_updated.timetuple())
+	# now_unix = time.mktime(datetime.datetime.now().timetuple())
         return {
             "ip": self.ip,
             "port": self.port,
             "info": self.info,
             "player_count": self.player_count,
             "player_total": self.player_total,
+            "game_version": self.game_version,
             "servermod_version": self.servermod_version,
             "pastebin_url": self.pastebin_url,
-            "date_updated": self.date_updated
+            "date_updated": time.mktime(self.date_updated.timetuple())
         }
+
+    def prettify_seconds(self, seconds):
+        m, s = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+        d, h = divmod(h, 24)
+
+        if d: return "{} days".format(d)
+        if h: return "{} hours".format(h)
+        if m: return "{} minutes".format(m)
+
+        return "{} seconds".format(s)

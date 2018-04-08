@@ -1,4 +1,4 @@
-import re
+import re, time, calendar
 
 from flask import jsonify, request
 from flask_restful import Resource
@@ -15,11 +15,27 @@ class ServerInfoResource(Resource):
         content = request.form.to_dict(flat=True)
         
         if content['update'] == "1":
+
+            print("Received data from {}:{}".format(content['ip'], content['port']))
+
             content.pop('update')
-            content.pop('passcode')
-            
-            info, pastebin_url, game_version = content.pop('info').split(':[:BREAK:]:')
-            player_count, player_total = content.pop('players').split('/')
+
+            if 'passcode' in content:
+                content.pop('passcode')
+
+            stuff = content.pop('info').split(':[:BREAK:]:')
+
+            info = stuff[0]
+            pastebin_url = stuff[1]
+            game_version = stuff[2]
+
+            morestuff = content.pop('players').split('/')
+            player_count = morestuff[0]
+
+            try:
+                player_total = morestuff[1]
+            except:
+                player_total = 20
             
             try:
                 temp = re.search(r"<size=1>(.*)<\/size>$", info)

@@ -25,14 +25,14 @@
 				</thead>
 				{% raw %}
 				<tbody>
-				  	<tr ng-repeat="server in servers | orderBy : 'player_count':true">
+				  	<tr ng-repeat="server in servers | orderBy : ['difference > 60', 'player_count == player_total', '-player_count']" ng-style="server.status">
 				   		<td>{{server.ip}}:{{server.port}}</td>
 				   		<td>{{server.player_count}}/{{server.player_total}}</td>
 				   		<td>{{server.info}}</td>
 				   		<td><a href="https://pastebin.com/raw/{{server.pastebin_url}}/">{{server.pastebin_url}}</a></td>
 				   		<td>{{server.game_version}}</td>
 				   		<td>{{server.servermod_version}}</td>
-				   		<td>{{server.date_updated}} seconds ago</td>
+				   		<td>{{server.difference_pretty}}</td>
 				 	</tr>
 				</tbody>
 				{% endraw %}

@@ -26,7 +26,7 @@
 				</thead>
 				{% raw %}
 				<tbody>
-				  	<tr ng-repeat="server in servers | filter: lessThan('difference', 600) | orderBy : ['difference > 60', 'player_count == player_total', '-player_count']" ng-style="server.status">
+				  	<tr ng-repeat="server in servers | filter: lessThan('difference', 600) | orderBy : ['difference > 60', 'player_count >= player_total', '-player_count']" ng-style="server.status">
 				   		<td>{{server.ip}}:{{server.port}}</td>
 				   		<td>{{server.player_count}}/{{server.player_total}}</td>
 				   		<td>{{server.info}}</td>
